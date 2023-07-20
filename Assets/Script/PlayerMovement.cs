@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
 
+    [SerializeField] private Rigidbody rb;
+
     public GameObject net;
     public Transform netAnimPos;
     public Transform netStartPos;
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
 
     private Vector3 _moveVector;
+
 
 
 
@@ -73,5 +76,12 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.MovePosition(_rigidbody.position + _moveVector);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("wall"))
+        {
+            Debug.Log("Duvar");
 
+        }
+    }
 }

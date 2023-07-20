@@ -6,7 +6,7 @@ using UnityEngine;
 public class MagneticNet : MonoBehaviour
 {
     public float magnetForce = 10f; // Çekme kuvveti, ihtiyaca göre ayarlanabilir.
-
+    public Animator anim;
 
     void OnTriggerStay(Collider other)
     {
@@ -16,11 +16,15 @@ public class MagneticNet : MonoBehaviour
             Vector3 direction = transform.position - other.transform.position;
             other.GetComponent<Rigidbody>().AddForce(direction.normalized * magnetForce);
             StartCoroutine(KillFish(other.gameObject));
+
+            anim.SetBool("fish", true);
         }
+        else
+            anim.SetBool("fish", false);
     }
     IEnumerator KillFish(GameObject fishObject)
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.45f);
 
         Destroy(fishObject);
 
