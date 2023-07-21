@@ -7,8 +7,14 @@ public class MagneticNet : MonoBehaviour
 {
     public float magnetForce = 10f; // Çekme kuvveti, ihtiyaca göre ayarlanabilir.
 
+    private int fishIndex;
 
-    void OnTriggerStay(Collider other)
+    private void Awake()
+    {
+        /*fishIndex = GetComponent<FishController>().FishIndex;*/
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("fish"))
         {
@@ -16,6 +22,16 @@ public class MagneticNet : MonoBehaviour
             Vector3 direction = transform.position - other.transform.position;
             other.GetComponent<Rigidbody>().AddForce(direction.normalized * magnetForce);
             StartCoroutine(KillFish(other.gameObject));
+
+            int index = other.GetComponent<FishController>().FishIndex;
+
+
+            if (index >= 0 && index < FishController.CollectFishList.Count)
+            {
+                FishController.CollectFishList[index]++;
+            }
+
+
 
         }
     }

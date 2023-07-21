@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7a41cf02588a744a9ad0c4ecad20cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishIndex: 0
+  FishIndex: 5
 --- !u!65 &2604483328240969148
 BoxCollider:
   m_ObjectHideFlags: 0
