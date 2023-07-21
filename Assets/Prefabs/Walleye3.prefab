@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7a41cf02588a744a9ad0c4ecad20cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishIndex: 0
+  fishIndex: 3
 --- !u!1 &6845626180840235862
 GameObject:
   m_ObjectHideFlags: 0

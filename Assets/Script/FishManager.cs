@@ -28,20 +28,6 @@ public class FishManager : MonoBehaviour
 
             GameObject obj = Instantiate(fish[i], new Vector3(randomX, -0.5f, randomZ), Quaternion.identity);
 
-            GameObject sameObject = GameObject.Find("Catfish0(Clone)");
-            GameObject sameObject1 = GameObject.Find("Walleye3(Clone)");
-
-            if (sameObject != null)
-            {
-                sameObject.GetComponent<FishController>().fishIndex = obj.GetComponent<FishController>().fishIndex;
-
-            }
-            else if (sameObject1 != null)
-            {
-                sameObject1.GetComponent<FishController>().fishIndex = obj.GetComponent<FishController>().fishIndex;
-            }
-            else
-                obj.GetComponent<FishController>().fishIndex = i;
         }
 
 
