@@ -59,8 +59,8 @@ public class PlayerMovement : MonoBehaviour
 
 
             _animator.SetBool("iSwimming", true);
-            net.transform.DOMove(netAnimPos.transform.position, 1.5f);
-
+            net.transform.DOMove(netAnimPos.transform.position, .5f);
+            //net.transform.position = netAnimPos.transform.position;
             //net.transform.position = netAnimPos.transform.position;
         }
 
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         {
 
             _animator.SetBool("iSwimming", false);
-            net.transform.DOMove(netStartPos.position, 0.25f);
+            net.transform.DOMove(netStartPos.position, 0.5f);
             //net.transform.position = netStartPos.transform.position;
 
         }
