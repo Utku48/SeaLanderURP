@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("iSwimming", true);
             net.transform.DOMove(netAnimPos.transform.position, .5f);
             //net.transform.position = netAnimPos.transform.position;
-            //net.transform.position = netAnimPos.transform.position;
+
         }
 
         else if (_joystick.Horizontal == 0 && _joystick.Vertical == 0)
