@@ -21,6 +21,7 @@ public class MagneticNet : MonoBehaviour
             // "fish" tagine sahip nesnenin "Net" nesnesine doğru yönelmesini sağlar.
             Vector3 direction = transform.position - other.transform.position;
             other.GetComponent<Rigidbody>().AddForce(direction.normalized * magnetForce);
+          
             StartCoroutine(KillFish(other.gameObject));
 
             int index = other.GetComponent<FishController>().FishIndex;
@@ -37,7 +38,7 @@ public class MagneticNet : MonoBehaviour
     }
     IEnumerator KillFish(GameObject fishObject)
     {
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.5f);
 
         Destroy(fishObject);
 

@@ -26,7 +26,7 @@ public class FishManager : MonoBehaviour
             float randomX = Random.Range(MinX, MaxX);
             float randomZ = Random.Range(MinZ, MaxZ);
 
-            GameObject obj = Instantiate(fish[i], new Vector3(randomX, -0.5f, randomZ), Quaternion.identity);
+            GameObject obj = Instantiate(fish[i], new Vector3(randomX, -0.8f, randomZ), Quaternion.identity);
 
         }
 
