@@ -6,6 +6,7 @@ TagManager:
   tags:
   - fish
   - wall
+  - sand
   layers:
   - Default
   - TransparentFX

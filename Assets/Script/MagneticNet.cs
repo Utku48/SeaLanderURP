@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,9 +10,10 @@ public class MagneticNet : MonoBehaviour
 
     private int fishIndex;
 
-    private void Awake()
+
+    public void Awake()
     {
-        /*fishIndex = GetComponent<FishController>().FishIndex;*/
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -21,8 +23,8 @@ public class MagneticNet : MonoBehaviour
             // "fish" tagine sahip nesnenin "Net" nesnesine doğru yönelmesini sağlar.
             Vector3 direction = transform.position - other.transform.position;
             other.GetComponent<Rigidbody>().AddForce(direction.normalized * magnetForce);
-          
-            StartCoroutine(KillFish(other.gameObject));
+
+            StartCoroutine(KillFishAndRespawnRandomFish(other.gameObject));
 
             int index = other.GetComponent<FishController>().FishIndex;
 
@@ -33,15 +35,20 @@ public class MagneticNet : MonoBehaviour
             }
 
 
-
         }
     }
-    IEnumerator KillFish(GameObject fishObject)
+    IEnumerator KillFishAndRespawnRandomFish(GameObject fishObject)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
 
-        Destroy(fishObject);
+        fishObject.transform.DOScale(Vector3.zero, 0.3f).From(fishObject.transform.localScale);
 
+
+        GameObject randomFishPrefab = FishManager.Instance.fish[Random.Range(0, FishManager.Instance.fish.Length)];
+
+        GameObject spawnedFish = Instantiate(randomFishPrefab, FishManager.Instance.GetSpawnPos(), Quaternion.identity);
+
+        spawnedFish.transform.DOScale(Vector3.zero, 0.3f).From().SetDelay(0.3f);
     }
 
 }

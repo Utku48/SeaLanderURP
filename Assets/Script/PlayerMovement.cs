@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -19,22 +20,35 @@ public class PlayerMovement : MonoBehaviour
     public Transform netAnimPos;
     public Transform netStartPos;
 
+    public Collider walkingArea;
+    private bool isWalking = false;
+
     private Rigidbody _rigidbody;
 
     private Vector3 _moveVector;
 
+    public static PlayerMovement Instance { get; private set; }
 
 
 
     private void Awake()
     {
 
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         Move();
+
 
     }
 
@@ -57,20 +71,19 @@ public class PlayerMovement : MonoBehaviour
             Quaternion xRotation = Quaternion.Euler(-23f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
             transform.rotation = xRotation;
 
-
-            _animator.SetBool("iSwimming", true);
-            net.transform.DOMove(netAnimPos.transform.position, .5f);
-            //net.transform.position = netAnimPos.transform.position;
-
+            if (!SandAnimController.walk)
+            {
+                _animator.SetBool("iSwimming", true);
+                net.transform.position = Vector3.Lerp(net.transform.position, netAnimPos.position, 5f * Time.deltaTime);
+            }
+         
         }
 
         else if (_joystick.Horizontal == 0 && _joystick.Vertical == 0)
         {
 
             _animator.SetBool("iSwimming", false);
-            net.transform.DOMove(netStartPos.position, 0.5f);
-            //net.transform.position = netStartPos.transform.position;
-
+            net.transform.position = Vector3.Lerp(net.transform.position, netStartPos.position, 5f * Time.deltaTime);
         }
 
         _rigidbody.MovePosition(_rigidbody.position + _moveVector);
@@ -83,5 +96,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Duvar");
 
         }
+
     }
 }
+
+
