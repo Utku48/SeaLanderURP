@@ -14,6 +14,8 @@ public class FishManager : MonoBehaviour
 
     private List<GameObject> activeFish = new List<GameObject>();
 
+    public List<GameObject> CollectedFishList = new List<GameObject>();
+
     private void Awake()
     {
         SpawnFish();

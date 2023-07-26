@@ -20,21 +20,18 @@ public class MagneticNet : MonoBehaviour
     {
         if (other.CompareTag("fish"))
         {
-            // "fish" tagine sahip nesnenin "Net" nesnesine doğru yönelmesini sağlar.
+            //"fish" tagine sahip nesnenin "Net" nesnesine doğru yönelmesini sağlar.
             Vector3 direction = transform.position - other.transform.position;
             other.GetComponent<Rigidbody>().AddForce(direction.normalized * magnetForce);
 
             StartCoroutine(KillFishAndRespawnRandomFish(other.gameObject));
 
-            int index = other.GetComponent<FishController>().FishIndex;
 
-
-            if (index >= 0 && index < FishController.CollectFishList.Count)
+            if (!FishManager.Instance.CollectedFishList.Contains(other.gameObject))
             {
-                FishController.CollectFishList[index]++;
+                Debug.Log(other.gameObject);
+                FishManager.Instance.CollectedFishList.Add(other.gameObject);
             }
-
-
         }
     }
     IEnumerator KillFishAndRespawnRandomFish(GameObject fishObject)
