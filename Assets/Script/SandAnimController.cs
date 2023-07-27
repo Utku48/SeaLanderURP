@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 
 public class SandAnimController : MonoBehaviour
 {
@@ -6,9 +7,14 @@ public class SandAnimController : MonoBehaviour
     private bool isPlayerInside;
 
     public GameObject net;
+    public GameObject rightHand;
+    public GameObject leftHand;
+
 
     public static bool walk;
 
+    public Transform RightHand;
+    public Transform LeftHand;
 
     private void Start()
     {
@@ -36,6 +42,12 @@ public class SandAnimController : MonoBehaviour
             Vector3 animPos = transform.position + Vector3.up * 1.5f;
             transform.position = animPos;
             net.SetActive(false);
+
+
+            rightHand.transform.position = RightHand.transform.position;
+            leftHand.transform.position = LeftHand.transform.position;
+            PlayerMovement.Instance.xRotation = Quaternion.Euler(0f, PlayerMovement.Instance.targetRotation.eulerAngles.y, PlayerMovement.Instance.targetRotation.eulerAngles.z);
+            transform.rotation = PlayerMovement.Instance.xRotation;
 
         }
     }
