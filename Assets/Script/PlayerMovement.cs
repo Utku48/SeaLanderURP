@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick _joystick;
 
-    [SerializeField] private Animator _animator;
+    public Animator _animator;
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 _animator.SetBool("iSwimming", true);
                 net.transform.position = Vector3.Lerp(net.transform.position, netAnimPos.position, 5f * Time.deltaTime);
             }
-         
+
         }
 
         else if (_joystick.Horizontal == 0 && _joystick.Vertical == 0)

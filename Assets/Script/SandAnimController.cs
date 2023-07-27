@@ -22,6 +22,7 @@ public class SandAnimController : MonoBehaviour
         {
             isPlayerInside = true;
             animator.SetBool("isWalking", true);
+            PlayerMovement.Instance._animator.SetBool("iSwimming", false);
 
             net.transform.position = PlayerMovement.Instance.netStartPos.position;
 
@@ -32,8 +33,9 @@ public class SandAnimController : MonoBehaviour
     {
         if (other.CompareTag("sand"))
         {
-            Vector3 animPos = transform.position + Vector3.up * 1.05f;
+            Vector3 animPos = transform.position + Vector3.up * 1.5f;
             transform.position = animPos;
+            net.SetActive(false);
 
         }
     }
@@ -44,6 +46,9 @@ public class SandAnimController : MonoBehaviour
         {
             isPlayerInside = false;
             animator.SetBool("isWalking", false);
+            PlayerMovement.Instance._animator.SetBool("iSwimming", true);
+
+            net.SetActive(true);
 
             net.transform.position = PlayerMovement.Instance.netAnimPos.position;
             walk = false;
