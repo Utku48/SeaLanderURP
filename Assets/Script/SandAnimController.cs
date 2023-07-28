@@ -4,7 +4,7 @@ using UnityEngine;
 public class SandAnimController : MonoBehaviour
 {
     public Animator animator;
-    private bool isPlayerInside;
+    public static bool isPlayerInside;
 
     public GameObject net;
     public GameObject rightHand;
@@ -32,6 +32,8 @@ public class SandAnimController : MonoBehaviour
 
             net.transform.position = PlayerMovement.Instance.netStartPos.position;
 
+
+
             walk = true;
         }
     }
@@ -42,6 +44,7 @@ public class SandAnimController : MonoBehaviour
             Vector3 animPos = transform.position + Vector3.up * 1.5f;
             transform.position = animPos;
             net.SetActive(false);
+
 
 
             rightHand.transform.position = RightHand.transform.position;
@@ -59,6 +62,8 @@ public class SandAnimController : MonoBehaviour
             isPlayerInside = false;
             animator.SetBool("isWalking", false);
             PlayerMovement.Instance._animator.SetBool("iSwimming", true);
+
+
 
             net.SetActive(true);
 

@@ -71,8 +71,13 @@ public class PlayerMovement : MonoBehaviour
 
             //  x rotasyonunu sabit bir değere ayarlamak istediğimiz için,
             // Quaternion.Euler fonksiyonunu kullandık.
+
+
             xRotation = Quaternion.Euler(-23f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
             transform.rotation = xRotation;
+
+
+
 
             if (!SandAnimController.walk)
             {
@@ -99,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Duvar");
 
         }
+
 
     }
 }
