@@ -13,7 +13,8 @@ public enum FishType
     BlueGill,
     Carp,
     CatFish,
-    Pike
-
+    Pike,
+    ossman
+        
 }
 

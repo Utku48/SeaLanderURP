@@ -29,7 +29,6 @@ public class MagneticNet : MonoBehaviour
 
             if (!FishManager.Instance.CollectedFishList.Contains(other.gameObject))
             {
-                Debug.Log(other.gameObject);
                 FishManager.Instance.CollectedFishList.Add(other.gameObject);
             }
         }
@@ -43,7 +42,8 @@ public class MagneticNet : MonoBehaviour
 
         GameObject randomFishPrefab = FishManager.Instance.fish[Random.Range(0, FishManager.Instance.fish.Length)];
 
-        GameObject spawnedFish = Instantiate(randomFishPrefab, FishManager.Instance.GetSpawnPos(), Quaternion.identity);
+        Vector3 randomRotation = new Vector3(0f, Random.Range(0f, 360f), 0f);
+        GameObject spawnedFish = Instantiate(randomFishPrefab, FishManager.Instance.GetSpawnPos(), Quaternion.Euler(randomRotation));
 
         spawnedFish.transform.DOScale(Vector3.zero, 0.3f).From().SetDelay(0.3f);
     }

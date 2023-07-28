@@ -15,6 +15,7 @@ public class FishManager : MonoBehaviour
     private List<GameObject> activeFish = new List<GameObject>();
 
     public List<GameObject> CollectedFishList = new List<GameObject>();
+    public float rotationSpeed = 10f;
 
     private void Awake()
     {
@@ -32,16 +33,15 @@ public class FishManager : MonoBehaviour
 
     private void SpawnFish()
     {
-
-
         for (int i = 0; i < fish.Length; i++)
         {
-            GameObject obj = Instantiate(fish[i], GetSpawnPos(), Quaternion.identity);
+            Vector3 randomRotation = new Vector3(0f, Random.Range(0f, 360f), 0f); // Sadece y ekseninde rastgele bir rotasyon oluşturuyoruz
+
+            GameObject obj = Instantiate(fish[i], GetSpawnPos(), Quaternion.Euler(randomRotation));
             activeFish.Add(obj);
         }
-
-
     }
+
 
     public Vector3 GetSpawnPos()
     {

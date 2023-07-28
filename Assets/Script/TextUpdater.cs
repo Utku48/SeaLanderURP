@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TextUpdater : MonoBehaviour
 {
+
     private TMP_Text componentText => GetComponent<TMP_Text>();
     public FishType fishtype;
     private void Update()
