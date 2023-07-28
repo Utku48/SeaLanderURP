@@ -65,19 +65,19 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 direction = Vector3.RotateTowards(transform.forward, _moveVector, _rotateSpeed * Time.deltaTime, 0.0f);
             targetRotation = Quaternion.LookRotation(direction);
-            #region Vector3.RotateTowards
-            //bir vektörün başka bir vektöre doğru döndürülmesini sağlayan bir yöntemdir. Bu fonksiyon, bir başlangıç vektörünü hedef vektöre yaklaştıracak şekilde yeni bir vektör döndürür.
-            #endregion
 
-            //  x rotasyonunu sabit bir değere ayarlamak istediğimiz için,
-            // Quaternion.Euler fonksiyonunu kullandık.
+            Quaternion xRotation;
 
+            if (SandAnimController.isPlayerInside)
+            {
+                xRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+            }
+            else
+            {
+                xRotation = Quaternion.Euler(-23f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+            }
 
-            xRotation = Quaternion.Euler(-23f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
             transform.rotation = xRotation;
-
-
-
 
             if (!SandAnimController.walk)
             {
@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+
 
         else if (_joystick.Horizontal == 0 && _joystick.Vertical == 0)
         {

@@ -1,10 +1,11 @@
-﻿using Unity.Mathematics;
+﻿using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class SandAnimController : MonoBehaviour
 {
     public Animator animator;
-    public static bool isPlayerInside;
+    public static bool isPlayerInside = false;
 
     public GameObject net;
     public GameObject rightHand;
@@ -27,12 +28,11 @@ public class SandAnimController : MonoBehaviour
         if (other.CompareTag("sand"))
         {
             isPlayerInside = true;
+
             animator.SetBool("isWalking", true);
             PlayerMovement.Instance._animator.SetBool("iSwimming", false);
 
             net.transform.position = PlayerMovement.Instance.netStartPos.position;
-
-
 
             walk = true;
         }
@@ -41,6 +41,7 @@ public class SandAnimController : MonoBehaviour
     {
         if (other.CompareTag("sand"))
         {
+           
             Vector3 animPos = transform.position + Vector3.up * 1.5f;
             transform.position = animPos;
             net.SetActive(false);
@@ -49,8 +50,7 @@ public class SandAnimController : MonoBehaviour
 
             rightHand.transform.position = RightHand.transform.position;
             leftHand.transform.position = LeftHand.transform.position;
-            PlayerMovement.Instance.xRotation = Quaternion.Euler(0f, PlayerMovement.Instance.targetRotation.eulerAngles.y, PlayerMovement.Instance.targetRotation.eulerAngles.z);
-            transform.rotation = PlayerMovement.Instance.xRotation;
+
 
         }
     }
